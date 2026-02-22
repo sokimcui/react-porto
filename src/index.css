@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 355 78% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 230 83% 56%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 230 83% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 355 78% 56%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ai-black text-white font-rajdhani antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron;
+  }
+}
+
+@layer components {
+  /* Cyberpunk Button */
+  .cyber-btn {
+    @apply relative px-8 py-4 font-orbitron font-semibold text-sm uppercase tracking-wider overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, #e63946 0%, #4361ee 100%);
+  }
+  
+  .cyber-btn::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, #4361ee 0%, #e63946 100%);
+  }
+  
+  .cyber-btn:hover::before {
+    @apply opacity-100;
+  }
+  
+  .cyber-btn span {
+    @apply relative z-10;
+  }
+
+  /* Glass Card */
+  .glass-card {
+    @apply relative bg-ai-gray/50 backdrop-blur-xl border border-white/10 rounded-xl;
+  }
+
+  /* Neon Border */
+  .neon-border {
+    @apply relative;
+  }
+  
+  .neon-border::before {
+    content: '';
+    @apply absolute -inset-[1px] rounded-xl opacity-50;
+    background: linear-gradient(45deg, #e63946, #4361ee, #e63946);
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+    z-index: -1;
+  }
+
+  /* Holographic Effect */
+  .holographic {
+    @apply relative overflow-hidden;
+  }
+  
+  .holographic::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(67, 97, 238, 0.2) 50%,
+      transparent 100%
+    );
+    animation: scan-line 2s linear infinite;
+  }
+  
+  .holographic:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Tech Grid Background */
+  .tech-grid {
+    background-image: 
+      linear-gradient(rgba(67, 97, 238, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(67, 97, 238, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Circuit Pattern */
+  .circuit-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234361ee' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Glitch Text Effect */
+  .glitch-text {
+    @apply relative;
+  }
+  
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+  
+  .glitch-text::before {
+    @apply text-ai-red;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-2px, -2px);
+  }
+  
+  .glitch-text::after {
+    @apply text-ai-blue;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(2px, 2px);
+  }
+
+  /* Electron Orbit Animation */
+  .electron {
+    @apply absolute w-3 h-3 rounded-full bg-white shadow-glow-white;
+    animation: electron-orbit 8s linear infinite;
+  }
+
+  /* Timeline Node */
+  .timeline-node {
+    @apply relative;
+  }
+  
+  .timeline-node::before {
+    content: '';
+    @apply absolute left-1/2 top-0 w-4 h-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ai-red;
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.8);
+  }
+
+  /* Input Focus Effect */
+  .cyber-input {
+    @apply relative bg-transparent border-b-2 border-white/20 transition-all duration-300;
+  }
+  
+  .cyber-input:focus {
+    @apply border-ai-blue outline-none;
+    box-shadow: 0 2px 20px rgba(67, 97, 238, 0.3);
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-ai-black;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gradient-to-b from-ai-red to-ai-blue rounded-full;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #e63946 0%, #4361ee 100%);
+  }
+
+  .bg-gradient-cyber {
+    background: linear-gradient(135deg, #e63946 0%, #4361ee 100%);
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-3000 {
+    animation-delay: 3s;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+/* Keyframes for gradient animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Particle canvas styling */
+.particle-canvas {
+  @apply fixed inset-0 pointer-events-none;
+  z-index: 0;
+}
+
+/* Section styling */
+section {
+  @apply relative z-10;
+}
+
+/* Navigation styling */
+.nav-blur {
+  @apply backdrop-blur-xl bg-ai-black/80;
+}
+
+/* Portfolio card 3D effect */
+.portfolio-card {
+  @apply transition-all duration-500;
+  transform-style: preserve-3d;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-10px) rotateX(5deg);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(230, 57, 70, 0.3),
+    0 0 60px rgba(67, 97, 238, 0.2);
+}
+
+/* Skill icon hover */
+.skill-icon {
+  @apply transition-all duration-300;
+}
+
+.skill-icon:hover {
+  @apply scale-125;
+  filter: drop-shadow(0 0 15px rgba(67, 97, 238, 0.8));
+}
+
+/* Contact form styling */
+.contact-form-container {
+  @apply relative;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px);
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  .hero-title {
+    @apply text-4xl;
+  }
+}
+
+/* Loading animation */
+.loading-spinner {
+  @apply w-8 h-8 border-2 border-white/20 border-t-ai-red rounded-full;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
